@@ -19,6 +19,8 @@
 		A760E4EF18C3EC0D00F0AA75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A760E4D718C3EC0D00F0AA75 /* UIKit.framework */; };
 		A760E4F718C3EC0D00F0AA75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A760E4F518C3EC0D00F0AA75 /* InfoPlist.strings */; };
 		A760E4F918C3EC0D00F0AA75 /* MyRestaurantsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E4F818C3EC0D00F0AA75 /* MyRestaurantsTests.m */; };
+		A760E50418C3EC4100F0AA75 /* MyRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E50318C3EC4100F0AA75 /* MyRestaurant.m */; };
+		A760E50718C3EFDB00F0AA75 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E50618C3EFDB00F0AA75 /* MyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,10 @@
 		A760E4F418C3EC0D00F0AA75 /* MyRestaurantsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyRestaurantsTests-Info.plist"; sourceTree = "<group>"; };
 		A760E4F618C3EC0D00F0AA75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A760E4F818C3EC0D00F0AA75 /* MyRestaurantsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRestaurantsTests.m; sourceTree = "<group>"; };
+		A760E50218C3EC4100F0AA75 /* MyRestaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRestaurant.h; sourceTree = "<group>"; };
+		A760E50318C3EC4100F0AA75 /* MyRestaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRestaurant.m; sourceTree = "<group>"; };
+		A760E50518C3EFDB00F0AA75 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		A760E50618C3EFDB00F0AA75 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +115,12 @@
 			children = (
 				A760E4E218C3EC0D00F0AA75 /* MyAppDelegate.h */,
 				A760E4E318C3EC0D00F0AA75 /* MyAppDelegate.m */,
+				A760E50518C3EFDB00F0AA75 /* MyViewController.h */,
+				A760E50618C3EFDB00F0AA75 /* MyViewController.m */,
 				A760E4E518C3EC0D00F0AA75 /* Images.xcassets */,
 				A760E4DA18C3EC0D00F0AA75 /* Supporting Files */,
+				A760E50218C3EC4100F0AA75 /* MyRestaurant.h */,
+				A760E50318C3EC4100F0AA75 /* MyRestaurant.m */,
 			);
 			path = MyRestaurants;
 			sourceTree = "<group>";
@@ -242,6 +252,8 @@
 			files = (
 				A760E4E418C3EC0D00F0AA75 /* MyAppDelegate.m in Sources */,
 				A760E4E018C3EC0D00F0AA75 /* main.m in Sources */,
+				A760E50718C3EFDB00F0AA75 /* MyViewController.m in Sources */,
+				A760E50418C3EC4100F0AA75 /* MyRestaurant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

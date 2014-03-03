@@ -7,16 +7,46 @@
 //
 
 #import "MyAppDelegate.h"
+#import "MyViewController.h"
+#import "MyRestaurant.h"
 
-@implementation MyAppDelegate
+@implementation MyAppDelegate {
+    NSArray *_restaurants;
+}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self fetchRestaurants];
+    [NSTimer scheduledTimerWithTimeInterval:2
+                                     target:self
+                                   selector:@selector(fetchRestaurants)
+                                   userInfo:nil
+                                    repeats:YES];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    MyViewController *vc = [[MyViewController alloc] init];
+    self.window.rootViewController = vc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+- (void)fetchRestaurants {
+    NSURL *url = [NSURL URLWithString:kAPIRestaurantsURL];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    NSURLResponse *resp;
+    NSError *err;
+    NSData *d = [NSURLConnection sendSynchronousRequest:req
+                                      returningResponse:&resp
+                                                  error:&err];
+    if (d) {
+        self->_restaurants = [MyRestaurant parseJSON:d];
+        [((MyViewController *)self.window.rootViewController).tableView reloadData];
+    }
+}
+
+- (NSArray *)restaurants {
+    return self->_restaurants;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -12,4 +12,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+#define kAPIURL @"http://ios-async-talk.illuminatedcomputing.com"
+#define kAPIRestaurantsURL [kAPIURL stringByAppendingString:@"/restaurants.json"]
+
+-(NSArray *)restaurants;
+
 @end

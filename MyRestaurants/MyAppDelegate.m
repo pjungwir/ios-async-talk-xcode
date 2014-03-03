@@ -9,6 +9,7 @@
 #import "MyAppDelegate.h"
 #import "MyViewController.h"
 #import "MyRestaurant.h"
+#import "MyParseRestaurantsOperation.h"
 
 @implementation MyAppDelegate {
     NSArray *_restaurants;
@@ -40,10 +41,23 @@
                            completionHandler:
      ^(NSURLResponse *resp, NSData *d, NSError *err) {
          if (d) {
-             self->_restaurants = [MyRestaurant parseJSON:d];
-             [((MyViewController *)self.window.rootViewController).tableView reloadData];
+             MyParseRestaurantsOperation *op = [[MyParseRestaurantsOperation alloc] initWithData:d];
+             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parsedRestaurants:) name:@"ParseRestaurantsOperationFinished" object:op];
+             NSOperationQueue *background = [NSOperationQueue new];
+             [background addOperation:op];
          }
      }];
+}
+
+- (void)parsedRestaurants:(NSNotification *)n {
+    [self performSelectorOnMainThread:@selector(updateRestaurants:)
+                           withObject:((MyParseRestaurantsOperation*)[n object]).restaurants
+                        waitUntilDone:NO];
+}
+
+- (void)updateRestaurants:(NSObject *)restaurants {
+    self->_restaurants = (NSArray *)restaurants;
+    [((MyViewController *)self.window.rootViewController).tableView reloadData];
 }
 
 - (NSArray *)restaurants {

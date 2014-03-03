@@ -21,6 +21,7 @@
 		A760E4F918C3EC0D00F0AA75 /* MyRestaurantsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E4F818C3EC0D00F0AA75 /* MyRestaurantsTests.m */; };
 		A760E50418C3EC4100F0AA75 /* MyRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E50318C3EC4100F0AA75 /* MyRestaurant.m */; };
 		A760E50718C3EFDB00F0AA75 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E50618C3EFDB00F0AA75 /* MyViewController.m */; };
+		A760E50A18C520C600F0AA75 /* MyParseRestaurantsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A760E50918C520C600F0AA75 /* MyParseRestaurantsOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		A760E50318C3EC4100F0AA75 /* MyRestaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRestaurant.m; sourceTree = "<group>"; };
 		A760E50518C3EFDB00F0AA75 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		A760E50618C3EFDB00F0AA75 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		A760E50818C520C500F0AA75 /* MyParseRestaurantsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyParseRestaurantsOperation.h; sourceTree = "<group>"; };
+		A760E50918C520C600F0AA75 /* MyParseRestaurantsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyParseRestaurantsOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 			children = (
 				A760E4E218C3EC0D00F0AA75 /* MyAppDelegate.h */,
 				A760E4E318C3EC0D00F0AA75 /* MyAppDelegate.m */,
+				A760E50818C520C500F0AA75 /* MyParseRestaurantsOperation.h */,
+				A760E50918C520C600F0AA75 /* MyParseRestaurantsOperation.m */,
 				A760E50518C3EFDB00F0AA75 /* MyViewController.h */,
 				A760E50618C3EFDB00F0AA75 /* MyViewController.m */,
 				A760E4E518C3EC0D00F0AA75 /* Images.xcassets */,
@@ -253,6 +258,7 @@
 				A760E4E418C3EC0D00F0AA75 /* MyAppDelegate.m in Sources */,
 				A760E4E018C3EC0D00F0AA75 /* main.m in Sources */,
 				A760E50718C3EFDB00F0AA75 /* MyViewController.m in Sources */,
+				A760E50A18C520C600F0AA75 /* MyParseRestaurantsOperation.m in Sources */,
 				A760E50418C3EC4100F0AA75 /* MyRestaurant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +462,7 @@
 				A760E4FE18C3EC0D00F0AA75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A760E4FF18C3EC0D00F0AA75 /* Build configuration list for PBXNativeTarget "MyRestaurantsTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +471,7 @@
 				A760E50118C3EC0D00F0AA75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

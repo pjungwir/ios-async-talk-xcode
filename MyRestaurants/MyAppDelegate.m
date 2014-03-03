@@ -34,15 +34,16 @@
 - (void)fetchRestaurants {
     NSURL *url = [NSURL URLWithString:kAPIRestaurantsURL];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    NSURLResponse *resp;
-    NSError *err;
-    NSData *d = [NSURLConnection sendSynchronousRequest:req
-                                      returningResponse:&resp
-                                                  error:&err];
-    if (d) {
-        self->_restaurants = [MyRestaurant parseJSON:d];
-        [((MyViewController *)self.window.rootViewController).tableView reloadData];
-    }
+    NSOperationQueue *q = [NSOperationQueue mainQueue];
+    [NSURLConnection sendAsynchronousRequest:req
+                                       queue:q
+                           completionHandler:
+     ^(NSURLResponse *resp, NSData *d, NSError *err) {
+         if (d) {
+             self->_restaurants = [MyRestaurant parseJSON:d];
+             [((MyViewController *)self.window.rootViewController).tableView reloadData];
+         }
+     }];
 }
 
 - (NSArray *)restaurants {

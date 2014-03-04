@@ -42,21 +42,22 @@
      ^(NSURLResponse *resp, NSData *d, NSError *err) {
          if (d) {
              MyParseRestaurantsOperation *op = [[MyParseRestaurantsOperation alloc] initWithData:d];
-             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parsedRestaurants:) name:@"ParseRestaurantsOperationFinished" object:op];
+             __weak MyParseRestaurantsOperation *weakOp = op;
+             [op setCompletionBlock:^{
+                 MyParseRestaurantsOperation *strongOp = weakOp;
+                 if (!strongOp) return;
+                 [self performSelectorOnMainThread:@selector(updateRestaurants:)
+                                        withObject:strongOp.restaurants
+                                     waitUntilDone:NO];
+             }];
              NSOperationQueue *background = [NSOperationQueue new];
              [background addOperation:op];
          }
      }];
 }
 
-- (void)parsedRestaurants:(NSNotification *)n {
-    [self performSelectorOnMainThread:@selector(updateRestaurants:)
-                           withObject:((MyParseRestaurantsOperation*)[n object]).restaurants
-                        waitUntilDone:NO];
-}
-
-- (void)updateRestaurants:(NSObject *)restaurants {
-    self->_restaurants = (NSArray *)restaurants;
+- (void)updateRestaurants:(NSArray *)restaurants {
+    self->_restaurants = restaurants;
     [((MyViewController *)self.window.rootViewController).tableView reloadData];
 }
 

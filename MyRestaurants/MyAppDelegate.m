@@ -41,13 +41,17 @@
                            completionHandler:
      ^(NSURLResponse *resp, NSData *d, NSError *err) {
          if (d) {
-             NSOperationQueue *background = [NSOperationQueue new];
-             [background addOperationWithBlock:^{
-                 NSArray *restaurants = [MyRestaurant parseJSON:d];
+             MyParseRestaurantsOperation *op = [[MyParseRestaurantsOperation alloc] initWithData:d];
+             __weak MyParseRestaurantsOperation *weakOp = op;
+             [op setCompletionBlock:^{
+                 MyParseRestaurantsOperation *strongOp = weakOp;
+                 if (!strongOp) return;
                  [self performSelectorOnMainThread:@selector(updateRestaurants:)
-                                        withObject:restaurants
+                                        withObject:strongOp.restaurants
                                      waitUntilDone:NO];
              }];
+             NSOperationQueue *background = [NSOperationQueue new];
+             [background addOperation:op];
          }
      }];
 }

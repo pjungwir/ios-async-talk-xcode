@@ -13,9 +13,11 @@
 
 @implementation MyAppDelegate {
     NSArray *_restaurants;
+    dispatch_queue_t _restaurants_queue;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self->_restaurants_queue = dispatch_queue_create("com.example.restaurants", NULL);
     [self fetchRestaurants];
     [NSTimer scheduledTimerWithTimeInterval:2
                                      target:self
@@ -41,24 +43,15 @@
                            completionHandler:
      ^(NSURLResponse *resp, NSData *d, NSError *err) {
          if (d) {
-             MyParseRestaurantsOperation *op = [[MyParseRestaurantsOperation alloc] initWithData:d];
-             __weak MyParseRestaurantsOperation *weakOp = op;
-             [op setCompletionBlock:^{
-                 MyParseRestaurantsOperation *strongOp = weakOp;
-                 if (!strongOp) return;
-                 [self performSelectorOnMainThread:@selector(updateRestaurants:)
-                                        withObject:strongOp.restaurants
-                                     waitUntilDone:NO];
-             }];
-             NSOperationQueue *background = [NSOperationQueue new];
-             [background addOperation:op];
+             dispatch_async(self->_restaurants_queue, ^{
+                 NSArray *restaurants = [MyRestaurant parseJSON:d];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     self->_restaurants = restaurants;
+                     [((MyViewController *)self.window.rootViewController).tableView reloadData];
+                 });
+             });
          }
      }];
-}
-
-- (void)updateRestaurants:(NSArray *)restaurants {
-    self->_restaurants = restaurants;
-    [((MyViewController *)self.window.rootViewController).tableView reloadData];
 }
 
 - (NSArray *)restaurants {
